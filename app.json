@@ -1,0 +1,23 @@
+{
+  "latest_app_version": "0.1.0",
+  "release_date": "2026-11-16",
+  "download_url": "https://github.com/genubar/genubar/releases/tag/v0.1.0",
+  "notes": "Genubar v0.1.0 initial release — Global menu bar daemon, GNOME Shell extension, GTK4 hook, Patch/Profile engine, and Settings app.",
+  "changelog": [
+    "Native GNOME top panel global menu integration across GTK3, GTK4, Electron, Qt, and AT-SPI2 backends",
+    "Application Patch & Profile system with live state bindings and menu normalization",
+    "Bundle, Style CSS, and Icon Pack customization UI with Settings Manager",
+    "Forward-compatible v0.1 configuration, patch, and registry schemas"
+  ],
+  "extension": {
+    "latest_version": "0.1.0",
+    "min_daemon_version": "0.1.0",
+    "tested_daemon_version": "0.1.0",
+    "ipc_protocol_version": 1,
+    "download_url": "https://github.com/genubar/genubar-gnome-extension/releases/tag/v0.1.0",
+    "raw_base_url": "https://raw.githubusercontent.com/genubar/genubar-gnome-extension/main",
+    "changelog": [
+      "Initial GNOME 47-51 Shell extension with lazy submenu rendering, L0 cache, and dynamic theming"
+    ]
+  }
+}
