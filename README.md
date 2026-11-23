@@ -1,17 +1,17 @@
 # Genubar Registry
 
-Centralized release metadata and package catalog for the **Genubar** global menubar ecosystem:
+Release metadata and package catalog for **Genubar**:
 - Core daemon, CLI, GTK4 hook, Settings UI & installer: [genubar/genubar](https://github.com/genubar/genubar)
 - GNOME Shell top-panel extension (`genubar@github.com`): [genubar/genubar-gnome-extension](https://github.com/genubar/genubar-gnome-extension)
 
 ## Repository Contents
 
-- **`app.json` (Live in `v0.1.0`):** Single source of truth checked by `genubar-packages` (`UpdateService`) and **Genubar Settings -> About & Updates** to detect core application releases and compatible `genubar-gnome-extension` updates.
-- **`registry.json` (Stub in `v0.1.0`, full catalog in `v0.2.0`):** Community marketplace feed queried by **Genubar Settings -> Marketplace**. In `v0.1.0`, `registry.json` serves a valid empty catalog (`{ "entries": [] }`) so default installations return `200 OK` without errors until community packages launch in `v0.2.0`.
+- **`app.json`:** Release manifest checked by `genubar-packages` (`UpdateService`) and **Genubar Settings -> About & Updates** to detect core application releases and compatible `genubar-gnome-extension` updates.
+- **`registry.json`:** Community marketplace feed queried by **Genubar Settings -> Marketplace**. In `v0.1.0`, `registry.json` serves an empty catalog (`{ "entries": [] }`) until community packages launch in `v0.2.0`.
 
 ---
 
-## App Release Manifest Schema (app.json)
+## App Release Manifest Schema
 
 Example structure read by `genubar_packages::models::AppReleaseManifest`:
 
@@ -25,11 +25,11 @@ Example structure read by `genubar_packages::models::AppReleaseManifest`:
     "Highlights for the core application release"
   ],
   "extension": {
-    "latest_version": "0.1.0",
+    "latest_version": "0.1.1",
     "min_daemon_version": "0.1.0",
     "tested_daemon_version": "0.1.0",
     "ipc_protocol_version": 1,
-    "download_url": "https://github.com/genubar/genubar-gnome-extension/releases/tag/v0.1.0",
+    "download_url": "https://github.com/genubar/genubar-gnome-extension/releases/tag/v0.1.1",
     "raw_base_url": "https://raw.githubusercontent.com/genubar/genubar-gnome-extension/main",
     "changelog": [
       "Highlights for the GNOME Shell extension release"
@@ -46,7 +46,7 @@ When **Genubar Settings -> About & Updates** fetches `app.json`:
 
 ---
 
-## Marketplace Catalog Schema (registry.json)
+## Marketplace Catalog Schema
 
 `registry.json` exposes an `entries` array parsed by `RemoteRegistryCatalog`. Supported package `kind` values in `v0.1.0` clients are:
 - `patch`
@@ -56,13 +56,13 @@ When **Genubar Settings -> About & Updates** fetches `app.json`:
 - `script`
 - `bundle`
 
-Each entry includes `id`, `kind`, `name`, `version`, `author`, optional `min_app_version`, `description`, `tags`, and inline TOML/CSS/Python `content` (unknown future kinds or entries with a higher `min_app_version` are displayed gracefully in older clients with an update badge).
+Each entry includes `id`, `kind`, `name`, `version`, `author`, optional `min_app_version`, `description`, `tags`, and inline TOML/CSS/Python `content` (unknown future kinds or entries with a higher `min_app_version` are displayed in older clients with an update badge).
 
-For a complete working catalog example, see `~/.config/genubar/example_registry.json` (or [example_registry.json](https://github.com/genubar/genubar/blob/main/crates/genubar-config/defaults/example_registry.json) in the `genubar` repository).
+For a working catalog example, see `~/.config/genubar/example_registry.json` (or [example_registry.json](https://github.com/genubar/genubar/blob/main/crates/genubar-config/defaults/example_registry.json) in the `genubar` repository).
 
 ---
 
-## Contributing Packages (PR Guidelines)
+## Contributing Packages
 
 When contributing community patches, profiles, styles, icon packs, or scripts for `v0.2.0+`:
 1. Ensure every entry uses a unique lowercase `id` (`[a-z0-9_-]`), accurate `min_app_version` (e.g. `"0.1.0"`), descriptive `tags`, and valid TOML/CSS/Python inside `content`.
